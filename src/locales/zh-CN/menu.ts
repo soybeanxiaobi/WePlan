@@ -1,8 +1,8 @@
 export default {
   'menu.welcome': '欢迎',
-  'menu.plan': '1',
-  'menu.plan.daily': '1.1',
-  'menu.plan.statistics': '1.2',
+  'menu.improve': 'Improve',
+  'menu.improve.tasks': 'Tasks',
+  'menu.improve.courses': 'Courses',
   'menu.more-blocks': '更多区块',
   'menu.home': '首页',
   'menu.login': '登录',

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'dva';
-import { Card, message } from 'antd';
+import { Card } from 'antd';
 import { ConnectState } from '@/models/connect';
 import styles from './CardItem.less';
 const CardGrid = Card.Grid as any;
@@ -27,7 +27,14 @@ export default class CardItem extends React.Component<IProps> {
     })
   }
   private handleTaskClick = (fileName: string) => {
-    message.success(fileName);
+    const { path, dispatch } = this.props;
+    const file = `${path}/${fileName}`;
+    dispatch({
+      type: 'task/openFileWithDefault',
+      payload: {
+        file,
+      }
+    })
   }
 
   public render() {

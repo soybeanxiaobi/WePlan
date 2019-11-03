@@ -1,5 +1,5 @@
 import { message } from 'antd';
-import { fetchTask } from '../services/task';
+import { fetchTask, openFileWithDefault } from '../services/task';
 import { Effect } from 'dva';
 
 export interface TaskModel {
@@ -9,6 +9,7 @@ export interface TaskModel {
   };
   effects: {
     fetchTask: Effect;
+    openFileWithDefault: Effect;
   };
   reducers: {
     setTaskList: any;
@@ -32,6 +33,13 @@ const TaskModel: TaskModel = {
         type: 'setTaskList',
         payload: Array.isArray(data) ? data : [],
       });
+    },
+    *openFileWithDefault({ payload }, { call, put }) {
+      const response = yield call(openFileWithDefault, payload);
+      const { code, msg } = response || { code: 502 };
+      if (code !== 0) {
+        message.error(`打开文件失败：${msg}`);
+      }
     },
   },
 

@@ -1,24 +1,14 @@
 const Router = require('koa-router');
-const { exec } = require('child_process');
+const { readDir, openFile } = require('../utils/index.js');
 
 const taskRouter = new Router();
 
+// 读取文件
 taskRouter.get('/api/fetch-folder', async ctx => {
   const {
     query: { path },
   } = ctx;
-  function readDir(readPath) {
-    return new Promise((resolve, reject) => {
-      exec(`ls ${readPath} |sort -n`, (err, files) => {
-        if (err) {
-          reject(err);
-        }
-        // 命令行输出为字符串，需要根据回车切割
-        const filesArr = files.split(/[\n]/);
-        resolve(filesArr);
-      });
-    });
-  }
+
   if (!path) {
     ctx.body = {
       code: -1,
@@ -28,10 +18,24 @@ taskRouter.get('/api/fetch-folder', async ctx => {
     const result = await readDir(path);
     ctx.body = {
       code: 0,
-      msg: ' ',
+      msg: '',
       data: result,
     };
   }
 });
+
+// 使用默认程序打开播放器
+taskRouter.post('/api/openFile-withDefault', async ctx => {
+  const params = ctx.request.body;
+  const { file } = params;
+  openFile(file);
+  ctx.body = {
+    code: 0,
+    msg: '',
+    data: {},
+  };
+});
+
+// 使用特定程序打开文件
 
 module.exports = taskRouter;

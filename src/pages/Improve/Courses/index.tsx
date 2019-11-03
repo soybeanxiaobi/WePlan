@@ -1,7 +1,7 @@
 import React from 'react';
 import { Tabs } from 'antd';
 import styles from './index.scss';
-import Task from './Task';
+import HighJs from './HighJs';
 // interface IDailyCleanProps {
 // }
 
@@ -9,10 +9,10 @@ const { TabPane } = Tabs;
 
 const DailyClean = () => {
   return (
-    <div className={styles.taskPanel}>
+    <div className={styles.coursesPanel}>
       <Tabs defaultActiveKey="1" >
-        <TabPane tab="Tab 1" key="1">
-          <Task />
+        <TabPane tab="JS高级语法课程" key="1">
+          <HighJs />
         </TabPane>
         <TabPane tab="Tab 2" key="2">
           Content of Tab Pane 2

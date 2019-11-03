@@ -26,7 +26,7 @@ export default class Task extends React.Component {
         </div>
         {
           TASK_CONFIG.map(({ title, desc, path }) => (
-            <Card title={this.title(title, desc, path)} size="small">
+            <Card key={title} title={this.title(title, desc, path)} size="small">
               <CardItem path={path} />
             </Card>
           ))

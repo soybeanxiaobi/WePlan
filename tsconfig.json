@@ -30,7 +30,8 @@
     "src/setupTests.ts",
     "tslint:latest",
     "tslint-config-prettier",
-    "node/routers",
+    "node",
     "src/models",
+
   ]
 }

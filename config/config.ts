@@ -102,30 +102,24 @@ export default {
       routes: [
         {
           path: '/',
-          redirect: '/plan/daily-clean',
+          redirect: '/improve/tasks',
         },
-        // {
-        //   path: '/welcome',
-        //   name: 'welcome',
-        //   icon: 'smile',
-        //   component: './Welcome',
-        // },
         {
-          name: 'plan',
-          icon: 'cloud-sync',
-          path: '/plan',
+          name: 'improve',
+          path: '/improve',
+          icon: 'clock-circle',
           routes: [
             {
-              icon: 'fire',
-              name: 'daily',
-              path: '/plan/daily-clean',
-              component: './Plan/DailyClean',
+              icon: 'qq',
+              name: 'tasks',
+              path: '/improve/tasks',
+              component: './Improve/Tasks',
             },
             {
-              icon: 'fire',
-              name: 'statistics',
-              path: '/plan/statistics',
-              component: './Plan/DailyClean',
+              name: 'courses',
+              icon: 'play-square',
+              path: '/improve/courses',
+              component: './Improve/Courses',
             },
           ],
         },
