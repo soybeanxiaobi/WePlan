@@ -7,7 +7,6 @@ interface IFProps {
   type: string;
 
 }
-
 interface IOwnProps {
   tasks?: {
     list: any[],
@@ -15,8 +14,8 @@ interface IOwnProps {
   dispatch?: any;
   loading?: boolean;
 }
-
 type IProps = IFProps & IOwnProps;
+
 const columns = [
   {
     key: 'task',
