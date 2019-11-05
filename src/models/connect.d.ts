@@ -1,13 +1,11 @@
 import { AnyAction, Dispatch } from 'redux';
 import { MenuDataItem } from '@ant-design/pro-layout';
 import { RouterTypes } from 'umi';
-import { GlobalModelState } from './global';
 import { DefaultSettings as SettingModelState } from '../../config/defaultSettings';
-import { UserModelState } from './user';
-import { LoginModelType } from './login';
-import { TaskModel } from './task';
+import { TasksModel } from './task';
+import { CoursesModel } from './courses';
 
-export { GlobalModelState, SettingModelState, UserModelState };
+export { SettingModelState };
 
 export interface Loading {
   global: boolean;
@@ -22,12 +20,10 @@ export interface Loading {
 }
 
 export interface ConnectState {
-  global: GlobalModelState;
   loading: Loading;
+  tasks: TasksModel;
+  courses: CoursesModel;
   settings: SettingModelState;
-  user: UserModelState;
-  login: LoginModelType;
-  task: TaskModel;
 }
 
 export interface Route extends MenuDataItem {

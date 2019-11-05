@@ -2,8 +2,7 @@ const Koa = require('koa');
 const cors = require('koa2-cors');
 const Router = require('koa-router');
 const bodyParser = require('koa-bodyparser');
-const routers = require('./routers');
-// const taskRouter = require('./routers/task');
+const routers = require('./api');
 const app = new Koa();
 // 跨域
 app.use(cors());

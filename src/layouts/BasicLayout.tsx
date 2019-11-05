@@ -10,7 +10,7 @@ import ProLayout, {
   Settings,
   DefaultFooter,
 } from '@ant-design/pro-layout';
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import Link from 'umi/link';
 import { Dispatch } from 'redux';
 import { connect } from 'dva';
@@ -98,26 +98,14 @@ const footerRender: BasicLayoutProps['footerRender'] = () => {
     </>
   );
 };
-
 const BasicLayout: React.FC<BasicLayoutProps> = props => {
-  const { dispatch, children, settings } = props;
-
-  /**
-   * init variables
-   */
-  const handleMenuCollapse = (payload: boolean): void => {
-    if (dispatch) {
-      dispatch({
-        type: 'global/changeLayoutCollapsed',
-        payload,
-      });
-    }
-  };
-
+  const { children, settings } = props;
+  const [collapsed, setCollapsed] = useState(false);
   return (
     <ProLayout
       logo={logo}
-      onCollapse={handleMenuCollapse}
+      collapsed={collapsed}
+      onCollapse={() => setCollapsed(!collapsed)}
       menuItemRender={(menuItemProps, defaultDom) => {
         if (menuItemProps.isUrl) {
           return defaultDom;
@@ -139,8 +127,8 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
         return first ? (
           <Link to={paths.join('/')}>{route.breadcrumbName}</Link>
         ) : (
-          <span>{route.breadcrumbName}</span>
-        );
+            <span>{route.breadcrumbName}</span>
+          );
       }}
       footerRender={footerRender}
       menuDataRender={menuDataRender}
@@ -154,7 +142,6 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
   );
 };
 
-export default connect(({ global, settings }: ConnectState) => ({
-  collapsed: global.collapsed,
+export default connect(({ settings }: ConnectState) => ({
   settings,
 }))(BasicLayout);

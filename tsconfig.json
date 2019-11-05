@@ -30,7 +30,7 @@
     "src/setupTests.ts",
     "tslint:latest",
     "tslint-config-prettier",
-    "node",
+    "node/api",
     "src/models",
 
   ]

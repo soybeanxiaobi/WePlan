@@ -1,10 +1,10 @@
 const Router = require('koa-router');
-const { readDir, openFile } = require('../utils/index.js');
+const { readDir, openFile } = require('../../utils/index.ts');
 
-const taskRouter = new Router();
+const coursesRouter = new Router();
 
 // 读取文件
-taskRouter.get('/api/fetch-folder', async ctx => {
+coursesRouter.get('/api/fetch-folder', async ctx => {
   const {
     query: { path },
   } = ctx;
@@ -25,7 +25,7 @@ taskRouter.get('/api/fetch-folder', async ctx => {
 });
 
 // 使用默认程序打开播放器
-taskRouter.post('/api/openFile-withDefault', async ctx => {
+coursesRouter.post('/api/openFile-withDefault', async ctx => {
   const params = ctx.request.body;
   const { file } = params;
   openFile(file);
@@ -38,4 +38,4 @@ taskRouter.post('/api/openFile-withDefault', async ctx => {
 
 // 使用特定程序打开文件
 
-module.exports = taskRouter;
+module.exports = coursesRouter;

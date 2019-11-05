@@ -1,0 +1,25 @@
+.dailyWarp {
+  min-height: 800px;
+  .overview {
+    height: 120px;
+    padding: 16px;
+    border-radius: 10px;
+    display: flex;
+    margin-bottom: 24px;
+    flex-direction: column;
+    background-color: #f8f8f8;
+    justify-content: space-between;
+    box-shadow: 0 2px 4px 0 #c8c9cc;
+    .overviewProgress {
+      text-align: center;
+      :global {
+        .ant-progress-outer {
+          width: 100px;
+          .ant-progress-inner {
+            border: 1px solid #c4c4c4;
+          }
+        }
+      }
+    }
+  }
+}

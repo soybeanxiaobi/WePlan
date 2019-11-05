@@ -1,25 +1,30 @@
 import { message } from 'antd';
-import { fetchTask, openFileWithDefault } from '../services/task';
+import { fetchTask } from '../services/task';
 import { Effect } from 'dva';
 
-export interface TaskModel {
+export interface TasksModel {
   namespace: string;
   state: {
-    list: string[];
+    list: {
+      music: any[];
+      study: any[];
+    };
   };
   effects: {
     fetchTask: Effect;
-    openFileWithDefault: Effect;
   };
   reducers: {
     setTaskList: any;
   };
 }
-const TaskModel: TaskModel = {
-  namespace: 'task',
+const TasksModel: TasksModel = {
+  namespace: 'tasks',
 
   state: {
-    list: [],
+    list: {
+      music: [],
+      study: [],
+    },
   },
 
   effects: {
@@ -31,25 +36,25 @@ const TaskModel: TaskModel = {
       }
       yield put({
         type: 'setTaskList',
-        payload: Array.isArray(data) ? data : [],
+        payload: {
+          type: payload.type,
+          data: Array.isArray(data) ? data : [],
+        },
       });
-    },
-    *openFileWithDefault({ payload }, { call, put }) {
-      const response = yield call(openFileWithDefault, payload);
-      const { code, msg } = response || { code: 502 };
-      if (code !== 0) {
-        message.error(`打开文件失败：${msg}`);
-      }
     },
   },
 
   reducers: {
-    setTaskList(_, { payload }) {
+    setTaskList(state: any, { payload }: any) {
+      const { type, data } = payload;
       return {
-        list: payload,
+        list: {
+          ...state.list,
+          [type]: data,
+        },
       };
     },
   },
 };
 
-export default TaskModel;
+export default TasksModel;
