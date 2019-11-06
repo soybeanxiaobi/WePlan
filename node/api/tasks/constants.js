@@ -7,7 +7,7 @@ exports.MUSIC_TASK = [
     key: 'basics',
     status: 'doing',
     descOrNum: '保证每一根声色',
-    execTime: '22:10/1-1',
+    execTime: '22:10',
   },
   {
     key: 'chord',
@@ -16,7 +16,7 @@ exports.MUSIC_TASK = [
     doneNum: 0,
     doingNum: 25,
     descOrNum: '打开节拍器',
-    execTime: '22:30/1-2',
+    execTime: '22:30',
   },
   {
     key: 'skill',
@@ -25,7 +25,7 @@ exports.MUSIC_TASK = [
     doneNum: 0,
     doingNum: 25,
     descOrNum: '和弦转换流畅',
-    execTime: '22:50/1-3',
+    execTime: '22:50',
   },
 ];
 

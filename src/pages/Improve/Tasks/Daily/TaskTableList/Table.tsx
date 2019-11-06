@@ -1,7 +1,9 @@
 import * as React from 'react';
 import { connect } from 'dva';
 import { ConnectState } from '@/models/connect';
-import { Tag, Table } from 'antd';
+import { Table, message } from 'antd';
+import { getColumns } from './columns';
+
 interface IFProps {
   key?: string;
   type: string;
@@ -15,46 +17,14 @@ interface IOwnProps {
   loading?: boolean;
 }
 type IProps = IFProps & IOwnProps;
-
-const columns = [
-  {
-    key: 'task',
-    title: '任务',
-    dataIndex: 'task',
-  },
-  {
-    key: 'descOrNum',
-    title: '描述/数量',
-    dataIndex: 'descOrNum',
-  },
-  {
-    key: 'execTime',
-    dataIndex: 'execTime',
-    title: '执行时间段/次序',
-  },
-  {
-    key: 'status',
-    dataIndex: 'status',
-    title: '状态',
-    render: (status: string) => {
-      if (status === 'doing') {
-        return <Tag color="#108ee9">PENDING</Tag>
-      } else {
-        return <Tag color="#87d068">DONE</Tag>
-      }
-    }
-  },
-  {
-    key: 'action',
-    title: '操作',
-    render: () => <a>完成</a>
-  }
-];
 @connect(({ tasks, loading }: ConnectState) => ({
   tasks,
   loading: loading.effects['tasks/fetchTask'],
 }))
 export default class TaskTable extends React.Component<IProps> {
+  public state = {
+    percent: 0,
+  }
   public componentDidMount() {
     const { type, dispatch } = this.props;
     dispatch({
@@ -63,6 +33,31 @@ export default class TaskTable extends React.Component<IProps> {
         type,
       },
     })
+  }
+  private increaseProgress = (key: string) => {
+    let percent = this.state.percent + 10;
+    if (percent > 100) {
+      percent = 100;
+    }
+    message.success(key);
+    this.setState({ percent });
+  };
+
+  private declineProgress = (key: string) => {
+    message.success(key);
+    let percent = this.state.percent - 10;
+    if (percent < 0) {
+      percent = 0;
+    }
+    this.setState({ percent });
+  };
+
+  private getColumnsProps = () => {
+    return {
+      percent: this.state.percent,
+      decline: this.declineProgress,
+      increase: this.increaseProgress,
+    };
   }
   public render() {
     const { type, tasks, loading } = this.props;
@@ -73,7 +68,7 @@ export default class TaskTable extends React.Component<IProps> {
         bordered
         loading={loading}
         dataSource={list[type]}
-        columns={columns}
+        columns={getColumns(this.getColumnsProps())}
         title={() => type.toLocaleUpperCase()}
       />
     );
