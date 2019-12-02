@@ -1,6 +1,16 @@
 const Music = require('../../schema/tasks/music');
 
-const { List, Test } = Music;
+const { List } = Music;
+
+function fetchList(params = {}) {
+  List.find(params, (err, res) => {
+    if (err) {
+      return err;
+    }
+    return res;
+  });
+}
+
 function insertList(params) {
   const list = new List(params);
   list.save((err, res) => {
@@ -13,7 +23,6 @@ function insertList(params) {
 
 function updateList(params) {
   const { id } = params;
-  console.log('执行更新');
   // 更新数组
   List.update(
     {
@@ -36,16 +45,4 @@ function updateList(params) {
   );
 }
 
-function fetchList(params = {}) {
-  console.log('执行查询');
-  List.find(params, (err, res) => {
-    if (err) {
-      return err;
-    }
-    console.log('fetchlist res ===>', res);
-    return res;
-  });
-}
-// fetchList({});
-updateList({ id: 'chord' });
-module.exports = { fetchList, insertList };
+module.exports = { fetchList, insertList, updateList };
