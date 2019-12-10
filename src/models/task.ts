@@ -1,5 +1,5 @@
 import { message } from 'antd';
-import { fetchTask } from '../services/task';
+import { fetchTask, fetchPanel } from '../services/task';
 import { Effect } from 'dva';
 
 export interface TasksModel {
@@ -9,12 +9,19 @@ export interface TasksModel {
       music: any[];
       study: any[];
     };
+    panel: {
+      progress: any,
+      doneNum: any,
+      clockDay: any,
+    };
   };
   effects: {
     fetchTask: Effect;
+    fetchPanel: Effect;
   };
   reducers: {
     setTaskList: any;
+    setTaskPanel: any;
   };
 }
 const TasksModel: TasksModel = {
@@ -25,6 +32,11 @@ const TasksModel: TasksModel = {
       music: [],
       study: [],
     },
+    panel: {
+      progress: {},
+      doneNum: {},
+      clockDay: {},
+    },
   },
 
   effects: {
@@ -32,7 +44,7 @@ const TasksModel: TasksModel = {
       const response = yield call(fetchTask, payload);
       const { code, msg, data } = response || { code: 502 };
       if (code !== 0) {
-        message.error(`获取文件夹列表失败：${msg}`);
+        message.error(`获取文件夹列表失败 ${msg}`);
       }
       yield put({
         type: 'setTaskList',
@@ -40,6 +52,17 @@ const TasksModel: TasksModel = {
           type: payload.type,
           data: Array.isArray(data) ? data : [],
         },
+      });
+    },
+    *fetchPanel({ payload }, { call, put }) {
+      const response = yield call(fetchPanel, payload);
+      const { code, msg, data } = response || { code: 502 };
+      if (code !== 0) {
+        message.error(`获取任务面板失败 ${msg}`);
+      }
+      yield put({
+        type: 'setTaskPanel',
+        payload: data,
       });
     },
   },
@@ -52,6 +75,13 @@ const TasksModel: TasksModel = {
           ...state.list,
           [type]: data,
         },
+      };
+    },
+    setTaskPanel(state: any, { payload }: any) {
+      console.log('payload', payload);
+      return {
+        ...state,
+        panel: { ...payload },
       };
     },
   },

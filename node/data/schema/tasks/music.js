@@ -1,10 +1,9 @@
 const mongoose = require('../../db/tasks/music');
 
 const { Schema } = mongoose;
-const listSchema = new Schema(
+const musicListSchema = new Schema(
   {
-    _id: String,
-    name: String,
+    name: Number,
     items: {
       type: Array,
     },
@@ -13,15 +12,7 @@ const listSchema = new Schema(
     collection: 'list',
   },
 );
-const TestSchema = new Schema(
-  {
-    name: { type: String },
-  },
-  {
-    collection: 'test',
-  },
-);
-const List = mongoose.model('List', listSchema);
-const Test = mongoose.model('Test', TestSchema);
 
-module.exports = { List, Test };
+const MusicListModel = mongoose.model('MusicList', musicListSchema);
+
+module.exports = { MusicListModel };

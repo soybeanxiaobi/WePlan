@@ -27,6 +27,10 @@ exports.MUSIC_TASK = [
     descOrNum: '和弦转换流畅',
     execTime: '22:50',
   },
+  {
+    task: '声乐-气息',
+    key: 'voice-breath',
+  },
 ];
 
 exports.STUDY_TASK = [

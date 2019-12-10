@@ -28,7 +28,7 @@ export function getColumns(props: IProps) {
       title: '进度',
       key: 'progress',
       dataIndex: 'progress',
-      render: (_: any, { key }) => (
+      render: (_: any, { key }: any) => (
         <>
           <Progress percent={percent} size="small" />
           <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 10 }}>
@@ -54,7 +54,7 @@ export function getColumns(props: IProps) {
       key: 'action',
       title: '操作',
       dataIndex: 'action',
-      render: (_: any, { status }) => status === 'doing' ? <a>完成</a> : <span style={{ color: '#87D068' }}>已完成</span>
+      render: (_: any, { status }: any) => status === 'doing' ? <a>完成</a> : <span style={{ color: '#87D068' }}>已完成</span>
     }
   ];
   return columns;

@@ -91,7 +91,20 @@ export default {
       routes: [
         {
           path: '/',
-          redirect: '/improve/tasks',
+          redirect: '/life/photography',
+        },
+        {
+          name: 'life',
+          path: '/life',
+          icon: 'smile',
+          routes: [
+            {
+              icon: 'camera',
+              name: 'photography',
+              path: '/life/photography',
+              component: './Life/PhotoGraphy',
+            }
+          ]
         },
         {
           name: 'improve',

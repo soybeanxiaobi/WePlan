@@ -3,9 +3,9 @@ const { exec } = require('child_process');
  * Node和浏览器所支持模块规范不一样
  */
 // 根据路径读取目录下文件 返回结果为string
-exports.readDir = function(readPath) {
+exports.readDir = function(readPath: String) {
   return new Promise((resolve, reject) => {
-    exec(`ls ${readPath} |sort -n`, (err, files) => {
+    exec(`ls ${readPath} |sort -n`, (err: String, files: any) => {
       if (err) {
         reject(err);
       }
@@ -17,9 +17,9 @@ exports.readDir = function(readPath) {
 };
 
 // 使用默认程序打开文件
-exports.openFile = function(target) {
+exports.openFile = function(target: String) {
   return new Promise((resolve, reject) => {
-    exec(`open ${target}`, (err, files) => {
+    exec(`open ${target}`, (err: String, files: any) => {
       if (err) {
         reject(err);
       }

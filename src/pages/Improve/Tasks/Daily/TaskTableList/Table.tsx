@@ -7,7 +7,6 @@ import { getColumns } from './columns';
 interface IFProps {
   key?: string;
   type: string;
-
 }
 interface IOwnProps {
   tasks?: {

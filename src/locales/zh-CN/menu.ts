@@ -1,5 +1,7 @@
 export default {
   'menu.welcome': '欢迎',
+  'menu.life': 'Life',
+  'menu.life.photography': '摄影',
   'menu.improve': 'Improve',
   'menu.improve.tasks': 'Tasks',
   'menu.improve.courses': 'Courses',

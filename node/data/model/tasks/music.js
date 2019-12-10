@@ -1,18 +1,20 @@
 const Music = require('../../schema/tasks/music');
 
-const { List } = Music;
+const { MusicListModel } = Music;
 
 function fetchList(params = {}) {
-  List.find(params, (err, res) => {
-    if (err) {
-      return err;
-    }
-    return res;
+  return new Promise((resolve, reject) => {
+    MusicListModel.find(params, { _id: 0 }, (err, res = []) => {
+      if (err) {
+        reject(err);
+      }
+      resolve(res);
+    });
   });
 }
 
 function insertList(params) {
-  const list = new List(params);
+  const list = new MusicListModel(params);
   list.save((err, res) => {
     if (err) {
       return err;
@@ -24,7 +26,7 @@ function insertList(params) {
 function updateList(params) {
   const { id } = params;
   // 更新数组
-  List.update(
+  MusicListModel.update(
     {
       'items.id': id,
     },
